@@ -51,7 +51,7 @@ def threaded_function(ip):
         exit(1)
 
 
-for ip in ips:
-    thread = Thread(target=threaded_function, args=[ip])
-    thread.start()
-    thread.join()
+# for ip in ips:
+thread = Thread(target=threaded_function, args=[ips[0]])
+thread.start()
+thread.join()
