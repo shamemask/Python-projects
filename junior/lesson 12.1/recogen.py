@@ -9,10 +9,10 @@ r = sr.Recognizer()
 
 def speech():
     with sr.Microphone(device_index=1) as source:
-        print('Скажите что-нибудь')
+        print('Say something')
         try:
             audio = r.listen(source, phrase_time_limit=2, timeout=2)
-            query = r.recognize_google(audio, language='ru-RU')
+            query = r.recognize_google(audio, language='en-EN')
         except (sr.WaitTimeoutError, sr.UnknownValueError):
             return None
         else:
