@@ -8,7 +8,7 @@ r = sr.Recognizer()
 
 
 def speech():
-    with sr.Microphone(device_index=1) as source:
+    with sr.Microphone(device_index=5) as source:
         print('Скажите что-нибудь')
         try:
             audio = r.listen(source, phrase_time_limit=2, timeout=2)
