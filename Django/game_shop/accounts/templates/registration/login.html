@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Вход на сайт{% endblock title %}
+
+{% block content %}
+    <h1 class="login-heading">Вход на сайт</h1>
+    {% if form.errors %}
+        <p class="login-para">Имя пользователя или пароль введены неправильно</p>
+    {% else %}
+        <p class="login-para">Используйте следующую форму для входа на сайт:</p>
+    {% endif %}
+    <div class="login-form">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p><input type="submit" value="Войти на сайт"></p>
+        </form>
+    </div>
+    <p class="login-para">Зарегистрироваться на сайте <a href="{% url 'sign_up' %}">можно здесь</a></p>
+
+    <p class="login-para">Забыли пароль? Его можно <a href="{% url 'password_reset' %}">восстановить здесь</a></p>
+    <p class="login-para">Поменять пароль на новый <a href="{% url 'password_change' %}">можно здесь</a></p>
+
+
+{% endblock content %}

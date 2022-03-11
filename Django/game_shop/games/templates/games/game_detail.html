@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Game Shop
+{% endblock title %}
+
+{% block content %}
+    <h1 class="game-detail-title-1">{{ game.title }}</h1>
+    <p class="price">Цена игры составляет {{ game.price }}$</p>
+    {% if game.image %}
+        <a href="{{ game.get_absolute_url }}"><img src="{{ game.image.url }}"></a>
+    {% endif %}
+
+    <h2 class="game-detail-title-2">Информация об игре</h2>
+    <p class="game-info">Игра добавлена пользователем {{ game.owner }} {{ game.created }}</p>
+    <p class="game-info">Дата последнего обновления записи: {{ game.updated }}</p>
+
+    <h2 class="game-detail-title-2">Описание игры</h2>
+    <p class="game-detail-description">{{ game.description }}</p>
+
+    <h2 class="game-detail-title-2">Комментарии к игре</h2>
+
+    <p><a href="{% url 'home' %}">Вернуться на главную</a></p>
+
+{% endblock content %}

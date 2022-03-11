@@ -1,0 +1,131 @@
+body {
+    background-color: aqua;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+.game {
+    border: darkblue 5px solid;
+    border-radius: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: lightgreen;
+    text-align: center;
+}
+
+img {
+    width: 80%;
+    height: 80%;
+}
+
+
+.game h2 {
+    border-bottom: violet 6px double;
+    color: darkviolet;
+}
+
+.game h3 {
+    color: darkgreen;
+}
+
+.game-date {
+    font-size: smaller;
+    margin: 0;
+    font-style: italic;
+}
+
+.game a {
+    text-decoration: none;
+    color: darkviolet;
+}
+
+.game-detail-title-1 {
+    color: darkviolet;
+    border-bottom: white 5px double;
+    font-weight: normal;
+}
+
+.game-detail-title-2 {
+    color: darkgreen;
+    border-bottom: greenyellow 3px solid;
+    font-weight: normal;
+}
+
+.price {
+    text-decoration: underline;
+    font-weight: bold;
+    color: magenta;
+}
+
+.login-form input[type=submit],
+.signup-form input[type=submit],
+.password-change-form input[type=submit],
+.password-reset-form input[type=submit]{
+    font-weight: bold;
+    background-color: cornflowerblue;
+    color: cornsilk;
+    padding: 10px 20px;
+    font-size: 20px;
+    width: auto;
+}
+
+
+.login-form label,
+.signup-form label,
+.password-change-form label,
+.password-reset-form label {
+    display: block;
+    font-size: 20px;
+}
+
+.login-form input,
+textarea,
+.signup-form input,
+.password-change-form input,
+.password-reset-form input {
+    margin-bottom: 10px;
+    background: ghostwhite;
+    border: 0;
+    padding: 6px 10px;
+    font-size: 20px;
+    width: 30%;
+}
+
+.login-heading,
+.signup-heading,
+.password-change-heading,
+.password-reset-heading {
+    font-weight: normal;
+    border-bottom: 1px solid grey;
+}
+
+.login-para,
+.signup-para,
+.password-change-para,
+.password-reset-para {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.nav h1 {
+    font-weight: normal;
+    color: blueviolet;
+    display: inline;
+}
+
+.login-logout-reg-nav {
+    float: right;
+    text-align: right;
+}
+
+.login-logout-reg-nav a {
+    text-decoration: none;
+    color: darkblue;
+
+}
+
+.nav-heading-link {
+    text-decoration: none;
+    color: blueviolet;
+}

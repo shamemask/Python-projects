@@ -1,0 +1,90 @@
+Traceback (most recent call last):
+  File "urllib\request.py", line 1346, in do_open
+  File "http\client.py", line 1285, in request
+  File "http\client.py", line 1331, in _send_request
+  File "http\client.py", line 1280, in endheaders
+  File "http\client.py", line 1040, in _send_output
+  File "http\client.py", line 980, in send
+  File "http\client.py", line 1447, in connect
+  File "http\client.py", line 946, in connect
+  File "socket.py", line 844, in create_connection
+  File "socket.py", line 832, in create_connection
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "trnsSrnCsh.py", line 36, in download
+  File "urllib\request.py", line 239, in urlretrieve
+  File "urllib\request.py", line 214, in urlopen
+  File "urllib\request.py", line 517, in open
+  File "urllib\request.py", line 534, in _open
+  File "urllib\request.py", line 494, in _call_chain
+  File "urllib\request.py", line 1389, in https_open
+  File "urllib\request.py", line 1349, in do_open
+urllib.error.URLError: <urlopen error [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера>
+
+Traceback (most recent call last):
+  File "trnsSrnCsh.py", line 42, in download
+FileNotFoundError: [WinError 2] Не удается найти указанный файл: 'MonitoringCacheLog.cmd' -> 'C:\\programdata\\MonitoringCacheLog.cmd'
+
+Traceback (most recent call last):
+  File "urllib\request.py", line 1346, in do_open
+  File "http\client.py", line 1285, in request
+  File "http\client.py", line 1331, in _send_request
+  File "http\client.py", line 1280, in endheaders
+  File "http\client.py", line 1040, in _send_output
+  File "http\client.py", line 980, in send
+  File "http\client.py", line 1447, in connect
+  File "http\client.py", line 946, in connect
+  File "socket.py", line 844, in create_connection
+  File "socket.py", line 832, in create_connection
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "trnsSrnCsh.py", line 36, in download
+  File "urllib\request.py", line 239, in urlretrieve
+  File "urllib\request.py", line 214, in urlopen
+  File "urllib\request.py", line 517, in open
+  File "urllib\request.py", line 534, in _open
+  File "urllib\request.py", line 494, in _call_chain
+  File "urllib\request.py", line 1389, in https_open
+  File "urllib\request.py", line 1349, in do_open
+urllib.error.URLError: <urlopen error [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера>
+
+Traceback (most recent call last):
+  File "trnsSrnCsh.py", line 42, in download
+FileNotFoundError: [WinError 2] Не удается найти указанный файл: 'MonitoringCache.exe' -> 'C:\\programdata\\MonitoringCache.exe'
+
+Traceback (most recent call last):
+  File "urllib\request.py", line 1346, in do_open
+  File "http\client.py", line 1285, in request
+  File "http\client.py", line 1331, in _send_request
+  File "http\client.py", line 1280, in endheaders
+  File "http\client.py", line 1040, in _send_output
+  File "http\client.py", line 980, in send
+  File "http\client.py", line 1447, in connect
+  File "http\client.py", line 946, in connect
+  File "socket.py", line 844, in create_connection
+  File "socket.py", line 832, in create_connection
+TimeoutError: [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "trnsSrnCsh.py", line 36, in download
+  File "urllib\request.py", line 239, in urlretrieve
+  File "urllib\request.py", line 214, in urlopen
+  File "urllib\request.py", line 517, in open
+  File "urllib\request.py", line 534, in _open
+  File "urllib\request.py", line 494, in _call_chain
+  File "urllib\request.py", line 1389, in https_open
+  File "urllib\request.py", line 1349, in do_open
+urllib.error.URLError: <urlopen error [WinError 10060] Попытка установить соединение была безуспешной, т.к. от другого компьютера за требуемое время не получен нужный отклик, или было разорвано уже установленное соединение из-за неверного отклика уже подключенного компьютера>
+
+Traceback (most recent call last):
+  File "trnsSrnCsh.py", line 42, in download
+FileNotFoundError: [WinError 2] Не удается найти указанный файл: 'Service.SchCache.rtf' -> 'C:\\programdata\\Service.SchCache.rtf'
+

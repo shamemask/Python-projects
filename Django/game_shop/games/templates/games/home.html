@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Game Shop
+{% endblock title %}
+
+
+{% block content %}
+    {% for game in game_list %}
+        <div class="game">
+            <h2><a href="{{ game.get_absolute_url }}">{{ game.title }}</a></h2>
+            {% if game.image %}
+                <a href="{{ game.get_absolute_url }}"><img src="{{ game.image.url }}"></a>
+            {% endif %}
+            <p class="game-date">Игра добавлена пользователем {{ game.owner }} {{ game.created }}</p>
+            <p class="game-date">Дата последнего обновления записи: {{ game.updated }}</p>
+            <h3>Описание игры</h3>
+            <p>{{ game.description | truncatewords:20 }}</p>
+        </div>
+    {% endfor %}
+{% endblock content %}

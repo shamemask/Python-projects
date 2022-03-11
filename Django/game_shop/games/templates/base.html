@@ -1,0 +1,26 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" type="text/css">
+    <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+    <div class="nav">
+        <h1><a href="{% url 'home' %}" class="nav-heading-link">Game Shop</a></h1>
+
+        <div class="login-logout-reg-nav">
+            {% if user.is_authenticated %}
+                Добро пожаловать, {{ user.username }} |
+                <a href="{% url 'logout' %}">Выйти из аккаунта</a>
+            {% else %}
+                <a href="{% url 'login' %}">Войти на сайт</a> |
+                <a href="{% url 'sign_up' %}">Зарегистрироваться</a>
+            {% endif %}
+        </div>
+    </div>
+    {% block content %}
+    {% endblock content %}
+</body>
+</html>

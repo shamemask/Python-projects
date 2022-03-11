@@ -1,0 +1,8 @@
+{
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": true,
+    "python.pythonPath": "/home/george_stamb/.local/share/virtualenvs/game_shop-b0S-XyBe/bin/python",
+    "python.linting.pycodestyleEnabled": false,
+    "python.linting.banditEnabled": false
+}
