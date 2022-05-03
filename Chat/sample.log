@@ -1,0 +1,26 @@
+2022-04-13 23:20:14,390 RClone [DEBUG]: rclone config: ~[loc]
+type = local
+
+~
+2022-04-13 23:20:14,394 RClone [DEBUG]: Invoking : rclone listremotes --config C:\Users\Lenovo\AppData\Local\Temp\tmpc_1tps2h
+2022-04-13 23:20:14,916 RClone [DEBUG]: b''
+2022-04-13 23:20:14,916 RClone [WARNING]: 2022/04/13 23:20:14 Failed to load config file "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpc_1tps2h": open C:\Users\Lenovo\AppData\Local\Temp\tmpc_1tps2h: The process cannot access the file because it is being used by another process.
+
+2022-04-13 23:20:37,733 RClone [DEBUG]: rclone config: ~[loc]
+type = local
+
+~
+2022-04-13 23:20:37,741 RClone [DEBUG]: Invoking : rclone listremotes --config C:\Users\Lenovo\AppData\Local\Temp\tmpvkz6wc6h
+2022-04-13 23:20:38,142 RClone [DEBUG]: b''
+2022-04-13 23:20:38,142 RClone [WARNING]: 2022/04/13 23:20:38 Failed to load config file "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpvkz6wc6h": open C:\Users\Lenovo\AppData\Local\Temp\tmpvkz6wc6h: The process cannot access the file because it is being used by another process.
+
+2022-04-13 23:20:38,143 root [INFO]: {'code': 1, 'out': b'', 'error': b'2022/04/13 23:20:38 Failed to load config file "C:\\\\Users\\\\Lenovo\\\\AppData\\\\Local\\\\Temp\\\\tmpvkz6wc6h": open C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpvkz6wc6h: The process cannot access the file because it is being used by another process.\n'}
+2022-04-15 20:27:26,199 RClone [DEBUG]: rclone config: ~[loc]
+type = local
+
+~
+2022-04-15 20:27:26,201 RClone [DEBUG]: Invoking : rclone listremotes --config C:\Users\Lenovo\AppData\Local\Temp\tmpxw8xzf6o
+2022-04-15 20:27:26,577 RClone [DEBUG]: b''
+2022-04-15 20:27:26,577 RClone [WARNING]: 2022/04/15 20:27:26 Failed to load config file "C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpxw8xzf6o": open C:\Users\Lenovo\AppData\Local\Temp\tmpxw8xzf6o: The process cannot access the file because it is being used by another process.
+
+2022-04-15 20:27:26,578 root [INFO]: {'code': 1, 'out': b'', 'error': b'2022/04/15 20:27:26 Failed to load config file "C:\\\\Users\\\\Lenovo\\\\AppData\\\\Local\\\\Temp\\\\tmpxw8xzf6o": open C:\\Users\\Lenovo\\AppData\\Local\\Temp\\tmpxw8xzf6o: The process cannot access the file because it is being used by another process.\n'}

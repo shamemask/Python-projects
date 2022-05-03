@@ -1,0 +1,26 @@
+
+{% extends "bootstrap/base.html" %}
+
+
+
+{% block html_attribs %} lang="ru"{% endblock %}
+
+{% block title %}Tickers Market{% endblock %}
+
+{%- block styles %}
+
+{{ super() }}
+
+<link href="{{ url_for('static', filename='favicon.ico') }}" rel="icon" type="image/x-icon">
+
+<link href="{{ url_for('static', filename='css/datatables.min.css') }}" rel="stylesheet">
+
+{% endblock %}
+
+
+
+{% block navbar %}
+
+{% include 'navbar.html' %}
+
+{% endblock navbar %}

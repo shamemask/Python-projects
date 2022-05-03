@@ -1,0 +1,172 @@
+
+{% extends "main.html" %}
+
+
+
+
+
+   <div class="container">
+
+       <h4>{{ table_name }}</h4>
+
+       <hr>
+            
+           <form action="" method="post" role="form" id="inputForm" class="form-inline">
+
+               {{ form.csrf }}
+
+               <div class="form-group row">
+
+                   <div class="form-group col-auto">
+
+                           {{ form.name.label }}
+
+                           {{ form.name(class="form-control") }}
+
+                   </div>
+
+                   <div class="form-group col-auto">
+
+                           {{ form.submit(class="btn btn-secondary", id="dtAccess_submit") }}
+
+                   </div>
+
+               </div>
+
+           </form>
+
+   </div>
+
+   <hr>
+
+   <div class="container">
+
+       <table class="table table-sm table-striped table-bordered display-6 small" id="dtAccess">
+        {% block content %}
+           <thead>
+
+           <tr>
+
+               {% for title in titles %}
+
+                   <th>{{ title }}</th>
+
+               {% endfor %}
+
+           </tr>
+
+           </thead>
+
+           <tbody>
+
+           {% for line in tlist %}
+
+               <tr>
+
+                   {% for col in line %}
+
+                       <td class="text-truncate" style="max-width: 500px;">{{ col }}</td>
+
+                   {% endfor %}
+
+               </tr>
+
+           {% endfor %}
+
+           </tbody>
+           {% endblock content %}
+       </table>
+
+   </div>
+
+
+
+
+
+{% block scripts %}
+
+   {{ super() }}
+
+
+   <script src="{{ url_for('static', filename = 'js/datatables.min.js') }}" type="text/javascript"></script>
+
+   <!-- Datatables initialization -->
+
+   <script>
+
+       $(document).ready(function () {
+           
+
+           $('#dtAccess').DataTable(
+
+               {
+
+                   "paging": true, // false to disable pagination (or any other option)
+
+                   "ordering": false,
+
+                   "lengthMenu": [[10, 25, 50, 100, 1000, -1], [10, 25, 50, 100, 1000, "All"]],
+
+                   "pageLength": 25,
+
+                   "dom": "<'row'<'col'l><'col-md-auto'f><'col-md-auto'B>>" +
+
+                       "<'row'<'col'rt>>" +
+
+                       "<'row'<'col'i><'col-md-auto'p>>",
+
+                   "buttons": ['excelHtml5', 'csvHtml5'],
+
+                   
+
+                   initComplete: function () {
+
+                       this.api().columns().every(function () {
+
+                           var column = this;
+
+                           var select = $('<br><select class="custom-select form-control form-control-sm"><option value=""></option></select>')
+
+                               .appendTo($(column.header()))
+
+                               .on('change', function () {
+
+                                   var val = $.fn.dataTable.util.escapeRegex(
+
+                                       $(this).val()
+
+                                   );
+
+                                   column
+
+                                       .search(val ? '^' + val + '$' : '', true, false)
+
+                                       .draw();
+
+                               });
+
+                   
+
+                           column.data().unique().sort().each(function (d, j) {
+
+                               select.append('<option value="' + d + '">' + d + '</option>')
+
+                           });
+
+                       });
+
+                   }
+
+               }
+
+           );
+
+           $('.dataTables_length').addClass('bs-select');
+
+       });
+
+   </script>
+
+
+
+{% endblock scripts %}
