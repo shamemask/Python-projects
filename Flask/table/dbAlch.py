@@ -92,7 +92,7 @@ class DBalchemy:
         # print('Find tickers')
         tickers = self.currentTickers()
         result = [[t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in tickers if t.tickername in names]
-        print(result)
+        # print(result)
         return result
 
     def get_one(self, name):

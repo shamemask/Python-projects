@@ -120,30 +120,30 @@
             }
             if(data.length > 0 ){
                 for(let datset of config.data.datasets){
-                    if(!data.find( dat => dat[1] == datset.label)){
+                    if(!data.find( dat => dat[0] == datset.label)){
                         index = config.data.datasets.indexOf(datset)
                         config.data.datasets.splice(index,1);
                     }
                 };
                 for(let dat of data){
-                    if(!config.data.datasets.find( datset => datset.label == dat[1])){
+                    if(!config.data.datasets.find( datset => datset.label == dat[0])){
                         color=getRandomColor();
                         config.data.datasets.push(
                             {
-                                label: dat[1],
+                                label: dat[0],
                                 backgroundColor: color,
                                 borderColor: color,
-                                data: [dat[2]],
+                                data: [dat[1]],
                                 fill: false,
                             }
                         )
                     }
                     else{
-                        config.data.datasets.find( record => record.label == dat[1]).data.push(dat[2]);
+                        config.data.datasets.find( record => record.label == dat[0]).data.push(dat[1]);
                     }
                 lineChart.update();
                 };
-                config.data.labels.push(data[0][3]);
+                config.data.labels.push(data[0][2]);
                 
             }
             
@@ -216,9 +216,9 @@
 
                 "ordering": false,
 
-                "lengthMenu": [[10, 25, 50, 100, 1000, -1], [10, 25, 50, 100, 1000, "All"]],
+                "lengthMenu": [[5, 10, 25, 50, 100, -1], [5, 10, 25, 50, 100,  "All"]],
 
-                "pageLength": 25,
+                "pageLength": 5,
 
                 "dom": "<'row'<'col'l><'col-md-auto'f><'col-md-auto'B>>" +
 
