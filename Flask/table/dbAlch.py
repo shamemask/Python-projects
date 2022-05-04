@@ -75,7 +75,7 @@ class DBalchemy:
         self.get_all()
 
     def get_everyone(self):
-        return [[t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in Tickers.query.order_by(Tickers.id.desc()).all()]
+        return [[t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in Tickers.query.order_by(Tickers.id.asc()).all()]
 
     def get_20_times_tickers(self,names):
         # last = self.last_20_sec()
