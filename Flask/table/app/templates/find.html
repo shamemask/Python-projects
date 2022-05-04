@@ -290,25 +290,25 @@
         names = "";
             getParamTable().forEach(
                 function (index, val) {
-                    names += index[1].substr(index[1].length - 2) + ",";
+                    names += index[0].substr(index[0].length - 2) + ",";
                 }
             );
             names = names.substr(0, names.length - 1);
             theUrl = document.URL + "get?tickers=" + names;
-            // console.log(theUrl);
+            console.log(theUrl);
             matrix = JSON.parse(httpGet(theUrl));
             //console.log(matrix)
             
             setParamTable(matrix);
             setTimeout("refreshTable();", 1000);
     }
-
+    let numColoms = 3;
     function setParamTable(matrix) {
         let table = $("table tr td")
         let i = 0;
         for (let td of table) {
-            if(td.innerHTML !=  matrix[parseInt(i / 4)][i % 4] + "")
-            td.innerHTML = matrix[parseInt(i / 4)][i % 4];
+            if(td.innerHTML !=  matrix[parseInt(i / numColoms)][i % numColoms] + "")
+            td.innerHTML = matrix[parseInt(i / numColoms)][i % numColoms];
             i++;
         }
         return matrix;
@@ -323,7 +323,7 @@
             function (index, val) {
                 array.push($(val).text());
                 i++;
-                if (i % 4 == 0) {
+                if (i % numColoms == 0) {
                     matrix.push(
                         array
                     );

@@ -11,7 +11,7 @@ def generate_movement():
 
 class DBalchemy:
     def __init__(self):
-        self.titles = ['id', 'ticker name', 'cost','dateCreated']
+        self.titles = [ 'ticker name', 'cost','dateCreated']
         
     
     def life(self):
@@ -59,7 +59,6 @@ class DBalchemy:
         return tickers
 
     def update_cost(self):
-        # last = self.currentSec()
         # print(tickers)
         tickers = self.currentTickers()
         self.add_next_tickers(tickers)
@@ -85,37 +84,22 @@ class DBalchemy:
     
     def get_all(self):
         # print('Ticker table')
-        # last = self.currentSec()
         tickers = self.currentTickers()
-        return [[t.id,t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in tickers]
+        return [[t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in tickers]
         
-        # tickers = Tickers.query.all()
-        
-        # tickers_table=[]
-        # for t in tickers:
-        #     tickers_table.append([t.id,t.tickername,t.cost])
-        
-        # return tickers_table
 
     def get_tickers(self,names):
         # print('Find tickers')
-        # last = self.currentSec()
         tickers = self.currentTickers()
-        return [[t.id,t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in tickers if t.tickername in names]
+        result = [[t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in tickers if t.tickername in names]
+        print(result)
+        return result
 
     def get_one(self, name):
         # print('Find ticker')
-        # last = self.currentSec()
         tickers = self.currentTickers()
-        return [[t.id,t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in tickers if name in t.tickername ]
-        
-        # req = []
-        # for t in tickers:
-        #     if name in t.tickername:
-        #         # print(t.id,t.tickername,t.cost)
-        #         req.append([t.id,t.tickername,t.cost])
-        
-        # return req
+        return [[t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in tickers if name in t.tickername ]
+       
     
     def del_all(self):
         tickers = Tickers.query.all()
@@ -131,8 +115,8 @@ if __name__ == '__main__':
     db1 = DBalchemy()
     # print(db1.get_20_times_tickers())
     
-    # db1.del_all()
-    # db1.add_all()
+    db1.del_all()
+    db1.add_all()
     while True:
         db1.life()
         # print(db1.get_20_times_tickers(['ticker_12', 'ticker_13', 'ticker_14', 'ticker_15', 'ticker_16', 'ticker_17', 'ticker_18', 'ticker_19']))
