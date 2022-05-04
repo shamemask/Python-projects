@@ -119,14 +119,38 @@
                 config.data.datasets[0].data.shift();
             }
             if(data.length > 0 ){
+                for(let i=0; i< data.length;i++){
+                    if(!config.data.labels.find(label=> label == data[i][2])){
+                        config.data.labels.push(data[i][2]);
+                    }
+                    if(!config.data.datasets.find( datset => datset.label == data[i][0])){
+                        color=getRandomColor();
+                        config.data.datasets.push(
+                            {
+                                label: data[i][0],
+                                backgroundColor: color,
+                                borderColor: color,
+                                data: [data[i][1]],
+                                fill: false,
+                            }
+                        )
+                    }
+                    else{
+                        config.data.datasets.find( record => record.label == data[i][0]).data.push(data[i][1]);
+                    }
+                }
                 for(let datset of config.data.datasets){
                     if(!data.find( dat => dat[0] == datset.label)){
                         index = config.data.datasets.indexOf(datset)
                         config.data.datasets.splice(index,1);
                     }
                 };
-                for(let dat of data){
-                    if(!config.data.datasets.find( datset => datset.label == dat[0])){
+                lineChart.update();
+
+
+                /*for(let dat of data ){
+                    if(!config.data.labels.find(label=> label == dat[2])){
+                        config.data.labels.push(dat[2]);
                         color=getRandomColor();
                         config.data.datasets.push(
                             {
@@ -139,12 +163,33 @@
                         )
                     }
                     else{
-                        config.data.datasets.find( record => record.label == dat[0]).data.push(dat[1]);
+                        if(!config.data.datasets.find( datset => datset.label == dat[0])){
+                            color=getRandomColor();
+                            config.data.datasets.push(
+                                {
+                                    label: dat[0],
+                                    backgroundColor: color,
+                                    borderColor: color,
+                                    data: [dat[1]],
+                                    fill: false,
+                                }
+                            )
+                        }
+                        else{
+                            config.data.datasets.find( record => record.label == dat[0]).data.push(dat[1]);
+                        }
+                    
                     }
-                lineChart.update();
+                    
+                }
+                for(let datset of config.data.datasets){
+                    if(!data.find( dat => dat[0] == datset.label)){
+                        index = config.data.datasets.indexOf(datset)
+                        config.data.datasets.splice(index,1);
+                    }
                 };
-                config.data.labels.push(data[0][2]);
-                
+                lineChart.update();
+                */
             }
             
         }

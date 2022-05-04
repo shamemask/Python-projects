@@ -65,7 +65,8 @@ def chart_data():
         global currentTickers
         while True:
             
-            json_data = json.dumps(d.get_tickers(currentTickers))
+            # json_data = json.dumps(d.get_tickers(currentTickers))
+            json_data = json.dumps(d.get_20_times_tickers(currentTickers))
             # print(currentTickers)
             # print(json_data)
             yield f"data:{json_data}\n\n"

@@ -30,11 +30,11 @@ class DBalchemy:
                 cost = 0       
             ticker = Tickers(tickername = t.tickername,cost = cost)         
             db.session.add(ticker)
-            col += 1 
-            if col % 3 > 0:
-                print(' [',t.tickername,t.cost,t.dateCreated.isoformat(' '),'] ',end='')
-            else:
-                print(' [',t.tickername,t.cost,t.dateCreated.isoformat(' '),'] ')
+            # col += 1 
+            # if col % 3 > 0:
+            #     print(' [',t.tickername,t.cost,t.dateCreated.isoformat(' '),'] ',end='')
+            # else:
+            #     print(' [',t.tickername,t.cost,t.dateCreated.isoformat(' '),'] ')
             
         db.session.commit()
 
@@ -75,12 +75,13 @@ class DBalchemy:
         self.get_all()
 
     def get_everyone(self):
-        return [[t.id,t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in Tickers.query.order_by(Tickers.id.desc()).all()]
+        return [[t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in Tickers.query.order_by(Tickers.id.desc()).all()]
 
     def get_20_times_tickers(self,names):
-        last = self.last_20_sec()
-        tickers = Tickers.query.filter(Tickers.dateCreated.in_(last) ).order_by(Tickers.id.desc()).all()
-        return [[t.id,t.tickername,t.cost,t.dateCreated.isoformat(' ')] for t in tickers]
+        # last = self.last_20_sec()
+        tickers = self.get_everyone()
+        # print(tickers)
+        return [t for t in tickers if t[0] in names]
     
     def get_all(self):
         # print('Ticker table')
@@ -119,4 +120,5 @@ if __name__ == '__main__':
     db1.add_all()
     while True:
         db1.life()
+        # print(db1.get_everyone())
         # print(db1.get_20_times_tickers(['ticker_12', 'ticker_13', 'ticker_14', 'ticker_15', 'ticker_16', 'ticker_17', 'ticker_18', 'ticker_19']))
