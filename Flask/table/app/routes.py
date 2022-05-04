@@ -1,9 +1,6 @@
-# from urllib import request
-# import time
-# import requests
-# from bs4 import BeautifulSoup
+
 from flask import render_template, request, Response, stream_with_context
-from app import app, excel # , turbo
+from app import app
 from dbAlch import DBalchemy
 from app.forms import SearchName
 import json
