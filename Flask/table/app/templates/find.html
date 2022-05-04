@@ -158,48 +158,7 @@
                 
 
 
-                /*for(let dat of data ){
-                    if(!config.data.labels.find(label=> label == dat[2])){
-                        config.data.labels.push(dat[2]);
-                        color=getRandomColor();
-                        config.data.datasets.push(
-                            {
-                                label: dat[0],
-                                backgroundColor: color,
-                                borderColor: color,
-                                data: [dat[1]],
-                                fill: false,
-                            }
-                        )
-                    }
-                    else{
-                        if(!config.data.datasets.find( datset => datset.label == dat[0])){
-                            color=getRandomColor();
-                            config.data.datasets.push(
-                                {
-                                    label: dat[0],
-                                    backgroundColor: color,
-                                    borderColor: color,
-                                    data: [dat[1]],
-                                    fill: false,
-                                }
-                            )
-                        }
-                        else{
-                            config.data.datasets.find( record => record.label == dat[0]).data.push(dat[1]);
-                        }
-                    
-                    }
-                    
-                }
-                for(let datset of config.data.datasets){
-                    if(!data.find( dat => dat[0] == datset.label)){
-                        index = config.data.datasets.indexOf(datset)
-                        config.data.datasets.splice(index,1);
-                    }
-                };
-                lineChart.update();
-                */
+                
             }
             
         }
