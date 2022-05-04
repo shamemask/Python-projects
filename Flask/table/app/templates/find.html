@@ -111,7 +111,7 @@
 
         const source = new EventSource("/chart-data");
 
-        
+
 
         source.onmessage = function (event) {
             const data = JSON.parse(event.data);
@@ -139,15 +139,23 @@
                     }
                     else{
                         config.data.datasets.find( record => record.label == data[i][0]).data.push(data[i][1]);
+                        
                     }
+                    
                 }
                 for(let datset of config.data.datasets){
                     if(!data.find( dat => dat[0] == datset.label)){
                         index = config.data.datasets.indexOf(datset)
                         config.data.datasets.splice(index,1);
                     }
+                    
                 };
                 lineChart.update();
+                config.data.labels =[];
+                for(let i=0;i < config.data.datasets.length; i++){
+                    config.data.datasets[i].data = [];
+                };
+                
 
 
                 /*for(let dat of data ){
@@ -331,7 +339,7 @@
     window.onload = setupRefresh;
     
     function setupRefresh () { // когда весь HTML загружен
-        setTimeout("refreshTable();", 1000); // через две секунды
+        setTimeout("refreshTable();", 5000); // через две секунды
     };
     function refreshTable(){
         names = "";
@@ -347,7 +355,7 @@
             //console.log(matrix)
             
             setParamTable(matrix);
-            setTimeout("refreshTable();", 1000);
+            setTimeout("refreshTable();", 5000);
     }
     let numColoms = 3;
     function setParamTable(matrix) {
