@@ -111,12 +111,14 @@
 
         const source = new EventSource("/chart-data");
 
+        
+
         source.onmessage = function (event) {
             const data = JSON.parse(event.data);
             console.log(data);
             if (config.data.labels.length === 20) {
-                config.data.labels.shift();
-                config.data.datasets[0].data.shift();
+                //config.data.labels.shift();
+                //config.data.datasets[0].data.shift();
             }
             if(data.length > 0 ){
                 for(let i=0; i< data.length;i++){
