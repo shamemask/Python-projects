@@ -8,6 +8,18 @@ from turbo_flask import Turbo
 import flask_excel as excel
 from waitress import serve
 from flask_cors import CORS
+import logging
+
+# logging.basicConfig(filename="log\log.log",
+#                     filemode='a',
+#                     format='%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s',
+#                     datefmt='%H:%M:%S'
+#                     )
+
+# logging.info("Running Urban Planning")
+
+# logger = logging.getLogger('werkzeug')
+# logger.setLevel(logging.ERROR)
 
 SECRET_KEY = os.urandom(32)
 
