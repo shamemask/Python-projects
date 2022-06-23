@@ -1,0 +1,25 @@
+{% extends 'layout/basic.html' %}
+
+{% block title %}
+
+   Бибилиотека :: Удалить автора
+
+{% endblock %}
+
+{% block content %}
+
+<h2> Вы уверены что хотите удалить автора {{author.name}}? </h2>
+
+<form action="#" method='post'>
+
+ <button type="submit">Удалить</button>
+
+</form>
+
+<a href='{{url_for('index')}}'>
+
+ <button>Отмена</button>
+
+</a>
+
+{% endblock %}

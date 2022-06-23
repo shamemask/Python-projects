@@ -1,0 +1,49 @@
+<html>
+
+<head>
+
+    <title>{% block title %} {% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <div class="header">
+
+        <h1>Библиотека</h1>
+
+        <div class="btns-wrapper">
+
+            <form action="{{ url_for('search_book')}}" method="post">
+
+                <input type="search" name='title' placeholder="Поиск книги">
+
+                <label>
+
+                    <select name="filter">
+
+                        <option value="author">По автору</option>
+
+                        <option value="book">По названию</option>
+
+                    </select>
+
+                </label>
+
+                <input type="submit" value="Искать">
+
+            </form>
+
+        </div>
+
+    </div>
+
+</head>
+
+<body>
+
+    {% block content %}
+
+    {% endblock %}
+
+</body>
+
+</html>

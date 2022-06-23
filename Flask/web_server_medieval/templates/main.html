@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ table_name }}</title>
+</head>
+<body>
+    
+
+    {% block styles %}
+    
+    <link href="{{ url_for('static', filename='js/css/datatables.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='js/css/bootstrap.min.css') }}" rel="stylesheet">
+    {% endblock %}
+
+  
+{% block navbar %}
+
+{% include 'navbar.html' %}
+
+{% endblock navbar %}
+
+{% block content %}
+<div class="container2">
+    <div class="row justify-content-md-center">
+        <div class="col-9">
+            <div class="card">
+                <div class="card-body">
+    <h4>{{ table_name }}</h4>
+    <table class="table table-sm table-striped table-bordered display-6 small" id="dtAccess">
+        <thead>
+            <tr>
+                {% for title in titles %}
+                <th>{{ title }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for line in tlist %}
+            <tr>
+                {% for col in (line|string).split('-') %}
+                <td class="text-truncate" style="max-width: 500px;">{{ col }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+</div>
+</div>
+</div>
+{% endblock content %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename = 'js/jquery.min.js') }}" type="text/javascript"></script>
+<script src="{{ url_for('static', filename = 'js/datatables.min.js') }}" type="text/javascript"></script>
+
+<!-- Datatables initialization -->
+
+<script>
+
+    $(document).ready(function () {
+
+        $('#dtAccess').DataTable(
+
+            {
+
+                "paging": true, // false to disable pagination (or any other option)
+
+                "ordering": false,
+
+                "lengthMenu": [[ 25, 50, 100, -1], [5, 10, 25, 50, 100,  "All"]],
+
+                "pageLength": 25,
+
+                "dom": "<'row'<'col'l><'col-md-auto'f><'col-md-auto'B>>" +
+
+                    "<'row'<'col'rt>>" +
+
+                    "<'row'<'col'i><'col-md-auto'p>>",
+
+                "buttons": ['excelHtml5', 'csvHtml5'],
+
+
+
+                initComplete: function () {
+
+                    this.api().columns().every(function () {
+
+                        var column = this;
+
+                        var select = $('<br><select class="custom-select form-control form-control-sm"><option value=""></option></select>')
+
+                            .appendTo($(column.header()))
+
+                            .on('change', function () {
+
+                                var val = $.fn.dataTable.util.escapeRegex(
+
+                                    $(this).val()
+
+                                );
+
+                                column
+
+                                    .search(val ? '^' + val + '$' : '', true, false)
+
+                                    .draw();
+
+                            });
+
+
+
+                        column.data().unique().sort().each(function (d, j) {
+
+                            select.append('<option value="' + d + '">' + d + '</option>')
+
+                        });
+
+                    });
+
+                }
+
+            }
+
+        );
+
+        $('.dataTables_length').addClass('bs-select');
+
+    });
+    
+    
+</script>
+
+{% endblock scripts %}
+
+</body>
+</html>

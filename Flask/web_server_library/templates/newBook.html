@@ -1,0 +1,35 @@
+{% extends 'layout/basic.html' %}
+
+{% block title %}
+
+Бибилиотека :: Добавить книгу
+
+{% endblock %}
+
+{% block content %}
+
+<h1>Добавить книгу</h1>
+
+<form action="#" method="post">
+
+  <div class="form-group">
+
+      <label for="name">Название:</label>
+
+      <input type="text" maxlength="100" name="name" placeholder="Название книги">
+
+      <label for="author">Автор:</label>
+
+      <input maxlength="100" name="author" placeholder="Автор книги">
+
+      <label for="genre">Жанр:</label>
+
+      <input maxlength="100" name="genre" placeholder="Жанр книги">
+
+      <button type="submit">Добавить</button>
+
+  </div>
+
+</form>
+
+{% endblock %}

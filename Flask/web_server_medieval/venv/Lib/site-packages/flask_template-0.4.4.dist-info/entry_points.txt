@@ -1,0 +1,3 @@
+[console_scripts]
+flasktemplate = flask_template.main:cli
+

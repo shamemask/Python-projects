@@ -1,0 +1,38 @@
+{% extends 'layout/basic.html' %}
+
+{% block title %}
+
+   Бибилиотека :: Редактировать автора
+
+{% endblock %}
+
+{% block content %}
+
+   <h1>Редактировать автора</h1>
+
+   <form action="{{ url_for('edit_author', author_id=author.id) }}" method="post">
+
+       <div class="form-group">
+
+           <label for="name">Имя автора:</label>
+
+           <input type="text" class="form-control" name="name" value="{{ author.name }}">
+
+           <button type="submit"> Сохранить</button>
+
+       </div>
+
+   </form>
+
+   <a href='{{ url_for('index') }}'>
+
+       <button>Отмена</button>
+
+   </a>
+
+{% endblock %}
+
+
+
+
+

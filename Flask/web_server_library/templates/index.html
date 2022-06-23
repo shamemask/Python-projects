@@ -1,0 +1,119 @@
+{% extends 'layout/basic.html' %}
+
+{% block title %}
+
+   Бибилиотека
+
+{% endblock %}
+
+{% block content %}
+
+   <div class="wrapper">
+
+       <div class="content">
+
+           <div class="books-wrapper">
+
+               <div class="books">
+
+                   <h2>Книги</h2>
+
+                   <a href="{{ url_for('new_book') }}">
+
+                       <button>Добавить книгу</button>
+
+                   </a>
+
+                   {% for book in context.books %}
+
+                       <div class="one-book">
+
+                           <div>
+
+                               <h3>Название: {{ book.title }}</h3>
+
+                               <h4>Автор: {{ book.authors|join(', ') }}</h4>
+
+                               <h4>Жанр: {{ book.genre }}</h4>
+
+                           </div>
+
+                           <div class="one-book-btns">
+
+                               <a href="{{ url_for('edit_book', book_id = book.id ) }}">
+
+                                   <button>✎</button>
+
+                               </a>
+
+                               <a href="{{ url_for('delete_book', book_id = book.id ) }}" style="margin-left: 10px;">
+
+                                   <button>✖</button>
+
+                               </a>
+
+
+
+                           </div>
+
+                       </div>
+
+                   {% endfor %}
+
+               </div>
+
+           </div>
+
+           <div class="authors-wrapper">
+
+               <div class="authors">
+
+                   <h2>Авторы</h2>
+
+                   <a href="{{ url_for('new_author') }}">
+
+                       <button>Добавить автора</button>
+
+                   </a>
+
+                   {% for author in context.authors %}
+
+                       <div class="one-author">
+
+                           <div>
+
+                               <h3>Имя: {{ author.name }}</h3>
+
+                               <h3>Книги: {{ author.books|join(', ') }}</h3>
+
+                           </div>
+
+                           <div class="one-author-btns">
+
+                              <a href="{{ url_for('edit_author', author_id = author.id ) }}">
+
+                                   <button>✎</button>
+
+                               </a>
+
+                               <a href="{{ url_for('delete_author', author_id = author.id ) }}" style="margin-left: 10px;">
+
+                                   <button>✖</button>
+
+                               </a>
+
+                           </div>
+
+                       </div>
+
+                   {% endfor %}
+
+               </div>
+
+           </div>
+
+       </div>
+
+   </div>
+
+{% endblock %}

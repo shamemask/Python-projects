@@ -1,0 +1,44 @@
+{% extends 'layout/basic.html' %}
+
+{% block title %}
+
+   Бибилиотека :: Изменить книгу
+
+{% endblock %}
+
+{% block content %}
+
+   <h1>Изменить книгу</h1>
+
+   <form action="{{ url_for('edit_book', book_id=book.id) }}" method="post">
+
+       <div class="form-group">
+
+           <label for="title">Название:</label>
+
+           <input type="text" class="form-control" name="title" value="{{ book.title }}">
+
+           <label for="author">Авторы:</label>
+
+           <input type="text" class="form-control" name="author" value="{{ book.authors|join(' ') }}">
+
+           <label for="genre">Жанр:</label>
+
+           <input type="text" class="form-control" name="genre" value="{{ book.genre }}">
+
+           <button type="submit"> Сохранить</button>
+
+       </div>
+
+   </form>
+
+   <a href='{{ url_for('index') }}'>
+
+       <button>Отмена</button>
+
+   </a>
+
+{% endblock %}
+
+
+
