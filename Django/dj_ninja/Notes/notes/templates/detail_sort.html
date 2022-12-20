@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+{% block title %}
+{{ category.title }} - все заметки
+{% endblock %}
+{% block content %}
+ 
+<div x-data="getNotes()">
+  <h3 class="text-center mt-5" style="color:#777">заметки в категории <span class="fw-bold">{{ category.title }}</span></h3>
+  <form id="note-form">
+      {% csrf_token %}
+  </form>
+  <div class="container pt-5">
+      <div class="input-group px-5">
+      
+          <input id="open-source-plugins" x-model="newNote" class="form-control" placeholder="Текст заметки">
+          <button @click="addNote({{ category.id }} )" class="btn btn-primary"><i class="uil uil-notes"></i> Добавить заметку</button>
+      </div>
+  </div>
+  <div class="container pt-5">
+      
+    <div class="card-group px-5 pb-1">
+      
+        <div >
+          <span>Sort by:</span>
+  <a href="/category/{{category.id}}/{% if filtname != '' and filtvalue != '' %}{{filtname}}+{{filtvalue}}{%else%}all{%endif%}/{% if arg == 'title' %}-title{%else%}title{%endif%}"
+  class="btn {% if 'title' in arg %}btn-secondary{%else%}btn-outline-dark{%endif%}">
+  {% if 'title' in arg %}<i class="uis uil-arrow-{% if '-' in arg %}down{%else%}up{%endif%}"></i>{%endif%}
+  A-Z</i></a>
+
+  <a href="/category/{{category.id}}/{% if filtname != '' and filtvalue != '' %}{{filtname}}+{{filtvalue}}{%else%}all{%endif%}/{% if arg == 'created' %}-created{%else%}created{%endif%}"
+  class="btn {% if 'created' in arg %}btn-secondary{%else%}btn-outline-dark{%endif%}">
+  {% if 'created' in arg %}<i class="uis uil-arrow-{% if '-' in arg %}down{%else%}up{%endif%}"></i>{%endif%}
+  <i class="uil uil-schedule"></i></a>
+
+  <a href="/category/{{category.id}}/{% if filtname != '' and filtvalue != '' %}{{filtname}}+{{filtvalue}}{%else%}all{%endif%}/{% if arg == 'favorite' %}-favorite{%else%}favorite{%endif%}"
+  class="btn {% if 'favorite' in arg %}btn-secondary{%else%}btn-outline-dark{%endif%}">
+  {% if 'favorite' in arg %}<i class="uis uil-arrow-{% if '-' in arg %}down{%else%}up{%endif%}"></i>{%endif%}
+  <i class="uil uil-favorite"></i></a>
+
+  <a href="/category/{{category.id}}/{% if filtname != '' and filtvalue != '' %}{{filtname}}+{{filtvalue}}{%else%}all{%endif%}/{% if arg == 'completed' %}-completed{%else%}completed{%endif%}"
+  class="btn {% if 'completed' in arg %}btn-secondary{%else%}btn-outline-dark{%endif%}">
+  {% if 'completed' in arg %}<i class="uis uil-arrow-{% if '-' in arg %}down{%else%}up{%endif%}"></i>{%endif%}
+  <i class="uil uil-rocket"></i></a>
+  <span>Fliter:</span>
+    {% with 'title date favorite status' as value %}
+    {% with value.split as details %}
+    <select name="field" id="id_field" onchange="filterList(this)">
+      <option value="ㅤ" >ㅤ</option>
+      <option value="all">all</option>
+      {% for opt in details  %}
+        <option value="{{opt}}" {% if filtname == opt  %}selected{%endif%}>{{opt}}</option>
+        
+      {%endfor%}
+    </select>
+    <span class="field_list" id="id_field_title" hidden="true" >
+      <input class="w-25" placeholder="Enter text" value="{% if filtvalue != opt %}{{filtvalue}}{%endif%}"></input>
+      <button onclick="filterTitle(this)" class="btn btn-primary"><i class="uil uil-search"></i> </button>
+    </span>
+    
+    <select class="field_list" id="id_field_date" hidden="true" onchange="filterCreated(this)">
+      <option value="ㅤ">ㅤ</option>
+      {% for note in category.note.all  %}
+        <option value="{{note.created | date:"d.m.Y h:m:s"}}" {% if filtvalue == opt %}selected{%endif%}>{{note.created | date:"d.m.Y h:m:s"}}</option>
+      {% endfor %}
+    </select>
+    <select class="field_list" id="id_field_favorite" hidden="true" onchange="filterFavorite(this)">
+      <option value="ㅤ">ㅤ</option>
+      {% for note in category.note.all  %}
+        <option value="{{note.favorite}}" {% if filtvalue == opt %}selected{%endif%}>{{note.favorite}}</option>
+      {% endfor %}
+    </select>
+    <select class="field_list" id="id_field_completed" hidden="true" onchange="filterCompleted(this)">
+      <option value="ㅤ">ㅤ</option>
+      {% for note in category.note.all  %}
+        <option value="{{note.completed}}" {% if filtvalue == opt %}selected{%endif%}>{{note.completed}}</option>
+      {% endfor %}
+    </select>
+    {% endwith %}
+    {% endwith %}
+  
+</div>
+</div>
+</div>
+
+
+  <div class="container">
+      
+    <div class="card-group px-5 pb-5">
+      
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+          <template x-for="note in notes">
+            <div class="col">
+              <div class="card h-100 bg-light mb-3">
+                <span x-text="note.date"></span>
+                <span x-text="note.type"></span>
+                <div class="card-header">
+                    <button @click="removeNote(note.id)" class="btn btn-danger"><i class="uil uil-trash-alt"></i> </button>
+                    <button @click="updateNoteFavorite(note.id, true)"
+                            x-show="note.favorite == 'False'" class="btn btn-light"><i class="uil uil-favorite"></i> </button>
+                    <button @click="updateNoteFavorite(note.id, false)"
+                            x-show="note.favorite == 'True'" class="btn btn-warning"><i class="uis uis-favorite"></i></button>
+                    <button @click="shareUrl(note.id)" class="btn btn-primary"><i class="uil uil-share"></i> </button>
+                    
+                </div>
+                <div class="card-body" x-html="note.title" >
+                </div>
+                <div class="card-footer">
+                <button @click="noteUrl(note.id)" class="btn btn-secondary"><i class="uil uil-edit"></i> </button>
+                <button @click="updateNoteSuccess(note.id, false)"
+                        x-show="note.status == 'True'" class="btn btn-success float-end"><i class="uil uil-check"></i> Сделано</button>
+                <button @click="updateNoteSuccess(note.id, true)"
+                        x-show="note.status == 'False'" class="btn btn-secondary float-end"><i class="uil uil-rocket"></i> В процессе</button>
+                </div>
+            </div>
+            </div>
+          </template>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+const csrftoken = document.querySelector('#note-form > input').value;
+
+window.onload = function() {
+  if ('{{filtname}}')
+  {
+    document.querySelector('#id_field').onchange();
+  }
+}
+
+const getNotes = () => {
+    return {
+        newNote: '',
+        notes: [
+            {% for note in category.note.all  %}
+            { 'title': '{{ note.title | safe  }}', 'id': '{{ note.id }}', 'status': '{{ note.completed }}', 'favorite': '{{ note.favorite }}' , 'date': '{{ note.created | date:"d.m.Y h:m:s" }}'},
+            {% endfor %}
+        ]
+    }
+};
+
+
+const filterList = async (elem)  => {
+  field_list = document.querySelectorAll('.field_list');
+  for(var i=0;i<field_list.length;i++){
+    field_list[i].hidden = true
+  }
+  if (elem.value != 'all'){
+    selector = document.querySelector('#id_field_'+elem.value)
+    selector.hidden = false
+  }
+  else{
+    href = "/category/{{category.id}}/all/{{arg}}";
+    console.log(href)
+    window.location.replace(href);
+  }
+};
+
+const filterTitle = async (elem)  => {
+  href = "/category/{{category.id}}/title+"+elem.parentNode.children[0].value+"/{{arg}}";
+  console.log(href)
+  window.location.replace(href);
+  
+};
+
+const filterCreated = async (elem)  => {
+  href = "/category/{{category.id}}/created+"+elem.value.replace(' ', '%20')+"/{{arg}}";
+  console.log(href)
+  window.location.replace(href);
+};
+
+const filterFavorite = async (elem) =>  {
+  href = "/category/{{category.id}}/favorite+"+elem.value+"/{{arg}}";
+  console.log(href)
+  window.location.replace(href);
+};
+
+const filterCompleted = async (elem) =>  {
+  href = "/category/{{category.id}}/completed+"+elem.value+"/{{arg}}";
+  console.log(href)
+  window.location.replace(href);
+};
+
+const noteUrl = async (noteId) =>  {
+  href = location.protocol + '//' + location.host+"/note/"+noteId;
+  console.log(href)
+  window.location.replace(href);
+};
+
+const addNote = async ( categoryId) => {
+    try {
+      var title = tinyMCE.get('open-source-plugins').getContent().toString()
+      console.error(title);
+    const res = await axios.post('/api/notes',
+        { title, category_id: categoryId },
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const strToHtml = async (str) => {
+    var htmlObject = document.createElement('div');
+    htmlObject.innerHTML = str;
+    return htmlObject.firstChild;
+}
+
+
+const shareUrl = async noteId => {
+  try {
+    var copy = location.protocol + '//' + location.host+"/note/"+noteId;
+    navigator.clipboard.writeText(copy)
+      .then(() => {
+        alert("Ссылка на заметку успешно скопирована\n"+copy);
+      })
+      .catch(err => {
+        console.log('Something went wrong', err);
+      });
+      
+    } catch (e) {
+      console.error(e);
+    }
+};
+
+const removeNote = async noteId => {
+    try {
+    const res = await axios.delete('/api/notes/' + noteId,
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const updateNote = async (noteId, noteStatus) => {
+    try {
+    const res = await axios.patch('/api/notes/' + noteId,
+        { id: noteId, completed: noteStatus},
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const updateNoteFavorite = async (noteId, noteStatus) => {
+    try {
+    
+    const res = await axios.patch('/api/notes/' + noteId + '/favorite/',
+        { id: noteId, favorite : noteStatus},
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    console.error(res);
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const updateNoteSuccess = async (noteId, noteStatus) => {
+    try {
+    const res = await axios.patch('/api/notes/' + noteId + '/success/',
+        { id: noteId, completed: noteStatus},
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+</script>
+{% endblock %}

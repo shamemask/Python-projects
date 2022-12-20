@@ -1,0 +1,143 @@
+{% extends "base.html" %}
+{% block title %}
+Заметка id {{ note.id }}
+{% endblock %}
+{% block content %}
+ 
+<div x-data="getNote()">
+  <h3 class="text-center mt-5" style="color:#777">Заметка id <span class="fw-bold">{{ note.id }}</span></h3>
+  <form id="note-form">
+      {% csrf_token %}
+  </form>
+  <div class="container pt-5">
+      <div class="input-group px-5">
+      
+          <input id="open-source-plugins" x-model="newNote" class="form-control" placeholder="Текст заметки" x-html="note.title">
+          <button @click="updateNoteTitle({{ note.id }} )" class="btn btn-primary"><i class="uil uil-notes"></i>Сохранить</button>
+      </div>
+  </div>
+  
+</div>
+
+
+<script>
+
+const csrftoken = document.querySelector('#note-form > input').value;
+
+window.onload = function() {
+    tinyMCE.get('open-source-plugins').execCommand("mceInsertContent", false, '{{ note.title | safe  }}');
+}
+
+const getNote = () => {
+    return {
+        newNote: '',
+        note: [
+            { 'title': '{{ note.title | safe  }}', 'id': '{{ note.id }}', 'status': '{{ note.completed }}', 'favorite': '{{ note.favorite }}' , 'date': '{{ note.created | date:"d.m.Y h:m:s" }}'},
+        ]
+    }
+};
+
+const addNote = async ( categoryId) => {
+    try {
+      var titleValue = tinyMCE.get('open-source-plugins').getContent().toString()
+      console.error(titleValue);
+    const res = await axios.post('/api/notes',
+        { titleValue, category_id: categoryId },
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const updateNoteTitle = async (noteId) => {
+  try {
+    var titleValue = tinyMCE.get('open-source-plugins').getContent().toString()
+  const res = await axios.patch('/api/notes/' + noteId + '/title/',
+      { id: noteId, title:titleValue},
+      { headers: { 'X-CSRFToken': csrftoken }}
+      );
+  console.error(res);
+  home = location.protocol + '//' + location.host;
+  console.log(home)
+  window.location.replace(home);
+    } catch (e) {
+      console.error(e);
+    }
+};
+
+const strToHtml = async (str) => {
+    var htmlObject = document.createElement('div');
+    htmlObject.innerHTML = str;
+    return htmlObject.firstChild;
+}
+
+
+const shareUrl = async noteId => {
+  try {
+    var copy = location.protocol + '//' + location.host+"/notes/"+noteId;
+    navigator.clipboard.writeText(copy)
+      .then(() => {
+        alert("Ссылка на заметку успешно скопирована\n"+copy);
+      })
+      .catch(err => {
+        console.log('Something went wrong', err);
+      });
+      
+    } catch (e) {
+      console.error(e);
+    }
+};
+
+const removeNote = async noteId => {
+    try {
+    const res = await axios.delete('/api/notes/' + noteId,
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const updateNote = async (noteId, noteStatus) => {
+    try {
+    const res = await axios.patch('/api/notes/' + noteId,
+        { id: noteId, completed: noteStatus},
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const updateNoteFavorite = async (noteId, noteStatus) => {
+    try {
+    
+    const res = await axios.patch('/api/notes/' + noteId + '/favorite/',
+        { id: noteId, favorite : noteStatus},
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    console.error(res);
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+const updateNoteSuccess = async (noteId, noteStatus) => {
+    try {
+    const res = await axios.patch('/api/notes/' + noteId + '/success/',
+        { id: noteId, completed: noteStatus},
+        { headers: { 'X-CSRFToken': csrftoken }}
+        );
+    location.reload();
+      } catch (e) {
+        console.error(e);
+      }
+};
+
+</script>
+{% endblock %}
