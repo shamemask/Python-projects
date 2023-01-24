@@ -67,7 +67,7 @@ def moy(year):
     if year == current_year:
         return months[current_month-1:12]
     elif year == last_year:
-        return months[0:current_month]
+        return months[0:current_month-1]
     else:
         return months
 
@@ -88,6 +88,7 @@ def dom(year, month):
 ir_calc = mortgage
 proc_calc_list = []
 month_proc_calc = 0
+i = 0
 for year in range(current_year, last_year+1):
     month_of_year = moy(year)
     for month in month_of_year:
@@ -95,13 +96,15 @@ for year in range(current_year, last_year+1):
         for day in range(first_day_month, last_day_month):
             proc_calc = round(ir_calc * ir_per_day, 2)
             month_proc_calc += proc_calc
+            
 
         proc_calc_list.append(month_proc_calc)
         month_proc_calc = 0
         ir_calc -= month_pay
+        i += 1
 
 mid_ir_pay = statistics.mean(proc_calc_list)
-mid_ir_pay += (month_pay - (2 * mid_ir_pay)) / (debt_years * 12)
+mid_ir_pay += (month_pay + mid_ir_pay * (365-28)/365 ) / (debt_years * 12)
 mid_ir_pay = round(mid_ir_pay, 2)
 print(f"Средняя оплата процентов {mid_ir_pay}")
 
