@@ -13,7 +13,7 @@
 
 # 4005
 
-n = 2
+n = 1001
 ind = 2
 diag_sum = 0
 attempts = 0
